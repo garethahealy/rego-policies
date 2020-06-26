@@ -8,6 +8,7 @@ load 'test_helper/load'
 
   run conftest test ${tmp} --output tap
 
+  print_info "${status}" "${output}"
   [ "$status" -eq 1 ]
   [ "${lines[1]}" = "not ok 1 - ${tmp}/list.yml - RoleBinding/NoApiGroup: RoleBinding roleRef.apiGroup key is null, use rbac.authorization.k8s.io instead." ]
   [ "${lines[2]}" = "not ok 2 - ${tmp}/list.yml - RoleBinding/NoKind: RoleBinding roleRef.kind key is null, use ClusterRole or Role instead." ]
@@ -18,6 +19,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/deny-ocp42-all-deprecated-apiversions" ".items[]")
   run conftest test ${tmp} --output tap
 
+  print_info "${status}" "${output}"
   [ "$status" -eq 1 ]
   [ "${lines[1]}" = "not ok 1 - ${tmp}/list.yml - Foo/Bar: servicecatalog.k8s.io/v1beta1 is deprecated." ]
   [ "${lines[2]}" = "not ok 2 - ${tmp}/list.yml - Foo/Bar: automationbroker.io/v1alpha1 is deprecated." ]
@@ -32,6 +34,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/deny-ocp43-all-deprecated-apiversions/template.yml")
   run conftest test ${tmp}/template.yml --output tap
 
+  print_info "${status}" "${output}"
   [ "$status" -eq 1 ]
   [ "${lines[1]}" = "not ok 1 - ${tmp}/template.yml - Template/Foo: API v1 for Template is no longer served by default, use template.openshift.io/v1 instead." ]
   [ "${lines[2]}" = "# Successes" ]
@@ -41,6 +44,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/deny-ocp43-all-deprecated-apiversions/list.yml" ".items[]")
   run conftest test ${tmp}/list.yml --output tap
 
+  print_info "${status}" "${output}"
   [ "$status" -eq 1 ]
   [ "${lines[1]}" = "not ok 1 - ${tmp}/list.yml - SecurityContextConstraints/Bar: API v1 for SecurityContextConstraints is no longer served by default, use security.openshift.io/v1 instead." ]
   [ "${lines[2]}" = "not ok 2 - ${tmp}/list.yml - ProjectRequest/Bar: API v1 for ProjectRequest is no longer served by default, use project.openshift.io/v1 instead." ]
@@ -56,7 +60,7 @@ load 'test_helper/load'
   echo $tmp
   run conftest test ${tmp} --output tap --combine
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
   [ "${lines[2]}" = "not ok 1 - Combined - Deployment/HasMissingSvc does not have a v1:Service or its selector labels dont match. See: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#service-and-replicationcontroller" ]
@@ -72,7 +76,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/warn-k8s-namespace-conftestcombine-bestpractices" ".items[]")
   run conftest test ${tmp} --output tap --combine
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
   [ "${lines[2]}" = "not ok 1 - Combined - Namespace/Foo does not have a networking.k8s.io/v1:NetworkPolicy. See: https://docs.openshift.com/container-platform/4.4/networking/configuring-networkpolicy.html" ]
@@ -83,7 +87,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/warn-k8s-service-conftestcombine-bestpractices" ".items[]")
   run conftest test ${tmp} --output tap --combine
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
   [ "${lines[2]}" = "not ok 1 - Combined - Service/HasMissingSvcMon does not have a monitoring.coreos.com/v1:ServiceMonitor or its selector labels dont match. See: https://docs.openshift.com/container-platform/4.4/monitoring/monitoring-your-own-services.html" ]
@@ -95,7 +99,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/warn-k8s_ocp-all-bestpractices" ".items[]")
   run conftest test ${tmp} --output tap
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
   [ "${lines[2]}" = "not ok 1 - ${tmp}/list.yml - Service/NoLabels: does not contain all the expected k8s labels in 'metadata.labels'. See: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels" ]
@@ -106,7 +110,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/warn-k8s_ocp-deployment_deploymentconfig-bestpractices/list-Deployment.yml" ".items[]")
   run conftest test ${tmp}/list-Deployment.yml --output tap
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
   [ "${lines[2]}" = "not ok 1 - ${tmp}/list-Deployment.yml - Deployment/ReplicaIsNull: replicas is null." ]
@@ -145,7 +149,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/warn-k8s_ocp-deployment_deploymentconfig-bestpractices/list-DeploymentConfig.yml" ".items[]")
   run conftest test ${tmp}/list-DeploymentConfig.yml --output tap
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
   [ "${lines[2]}" = "not ok 1 - ${tmp}/list-DeploymentConfig.yml - DeploymentConfig/ReplicaIsNull: replicas is null." ]
@@ -184,7 +188,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/warn-ocp-deploymentconfig-bestpractices" ".items[]")
   run conftest test ${tmp} --output tap
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
@@ -196,7 +200,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/warn-podman-history-bestpractices/jenkins-python-mising.json")
   run conftest test ${tmp}/jenkins-python-mising.json --output tap
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
   [ "${lines[2]}" = "not ok 1 - ${tmp}/jenkins-python-mising.json - quay.io/redhat-cop/jenkins-agent-python:has-missing-sha: did not find expected SHA" ]
@@ -207,7 +211,7 @@ load 'test_helper/load'
   local tmp=$(split_via_key "_test/warn-podman-images-bestpractices")
   run conftest test ${tmp} --output tap
 
-  print_err "$status" "$output"
+  print_info "${status}" "${output}"
   [ "$status" -eq 0 ]
   [ "${lines[1]}" = "# Warnings" ]
   [ "${lines[2]}" = "not ok 1 - ${tmp}/jenkins-base.json - quay.io/openshift/origin-jenkins-agent-base:4.4: has a size of '692.095652Mi', which is greater than '512Mi' limit." ]
