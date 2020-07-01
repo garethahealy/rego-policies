@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: CatalogsourceconfigsV1
+metadata:
+  name: catalogsourceconfigsv1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - catalogsourceconfigs.operators.coreos.com
+      kinds:
+      - v1*

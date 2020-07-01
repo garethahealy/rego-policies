@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: OperatorsourcesV1
+metadata:
+  name: operatorsourcesv1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - operatorsources.operators.coreos.com
+      kinds:
+      - v1*

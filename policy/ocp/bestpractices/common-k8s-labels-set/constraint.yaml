@@ -1,0 +1,15 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: CommonK8sLabelsSet
+metadata:
+  name: commonk8slabelsset
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - apps.openshift.io/v1
+      - apps
+      kinds:
+      - DeploymentConfig
+      - DaemonSet
+      - Deployment
+      - StatefulSet

@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: ImagestreamV1
+metadata:
+  name: imagestreamv1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - v1
+      kinds:
+      - ImageStream

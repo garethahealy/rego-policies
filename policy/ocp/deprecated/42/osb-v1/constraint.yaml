@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: OsbV1
+metadata:
+  name: osbv1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - osb.openshift.io
+      kinds:
+      - v1*

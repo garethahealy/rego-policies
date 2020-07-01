@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: DeploymentconfigV1
+metadata:
+  name: deploymentconfigv1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - v1
+      kinds:
+      - DeploymentConfig

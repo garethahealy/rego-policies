@@ -1,5 +1,7 @@
 package main
 
+# warn: Check the image contains a SHA in its layers
+# @Kinds containers-cop.redhat.com/v1/PodmanHistory
 warn[msg] {
   input.kind == "PodmanHistory"
   not imageHistoryContainsLayer(input.items)

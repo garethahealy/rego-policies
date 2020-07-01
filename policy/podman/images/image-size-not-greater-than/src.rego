@@ -1,5 +1,7 @@
 package main
 
+# warn: Check the image size is not greater than a value in Mi
+# @Kinds containers-cop.redhat.com/v1/PodmanImages
 warn[msg] {
   #NOTE: upperBound is an arbitrary number and it should be changed to what your company believes is the correct policy
 

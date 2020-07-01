@@ -2,6 +2,11 @@
 
 load _helpers
 
+#setup() {
+#  konstraint create
+#  konstraint doc -o POLICIES.md
+#}
+
 @test "_test/deny-k8s-rolebinding-roleref" {
   split_via_yq "_test/deny-k8s-rolebinding-roleref/*.yml" ".items[]"
   run conftest test /tmp/rego-policies/_test/deny-k8s-rolebinding-roleref --output tap

@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: ServicecatalogV1beta1
+metadata:
+  name: servicecatalogv1beta1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - servicecatalog.k8s.io/v1beta1
+      kinds:
+      - '*'

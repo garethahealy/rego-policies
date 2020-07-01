@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: AutomationbrokerV1alpha1
+metadata:
+  name: automationbrokerv1alpha1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - automationbroker.io/v1alpha1
+      kinds:
+      - '*'

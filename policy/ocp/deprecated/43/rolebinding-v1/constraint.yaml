@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: RolebindingV1
+metadata:
+  name: rolebindingv1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - v1
+      kinds:
+      - RoleBinding

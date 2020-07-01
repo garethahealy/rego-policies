@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: SecuritycontextconstraintsV1
+metadata:
+  name: securitycontextconstraintsv1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - v1
+      kinds:
+      - SecurityContextConstraints

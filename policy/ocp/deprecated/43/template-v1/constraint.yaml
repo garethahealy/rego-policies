@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: TemplateV1
+metadata:
+  name: templatev1
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - v1
+      kinds:
+      - Template
